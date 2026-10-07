@@ -1,0 +1,64 @@
+﻿INFORMATIKA — 30 TA TASODIFIY TEST
+
+WINDOWS 10 / 11 DA ISHGA TUSHIRISH
+1. ZIP faylni kompyuteringizga yuklab oling.
+2. ZIP ustida sichqonchaning o‘ng tugmasini bosing.
+3. «Извлечь все…» / «Extract All…» ni tanlang.
+4. Masalan, D:\Informatika-test papkasiga to‘liq chiqaring.
+   ZIP ichidan ishga tushirmang.
+5. Chiqarilgan papkada 1_TESTNI_OCHISH.cmd ni ikki marta bosing.
+   Yoki Informatika-30-test.html faylini Chrome yoki Edge orqali oching.
+6. «Testni boshlash» tugmasini bosing.
+
+Internet, Python, Node.js yoki alohida server talab qilinmaydi.
+Windows .cmd faylni ochmasa, HTML faylni bevosita brauzerda oching.
+
+SINF DAGI BOSHQA KOMPYUTERLAR
+1. O‘qituvchi kompyuterida 3_LOKAL_TARMOQ.cmd ni ikki marta bosing.
+2. Windows ruxsat so‘rasa, ruxsat bering. Qora oyna ochiq tursin.
+3. Oynadagi manzilni o‘quvchilarga ayting, masalan:
+   http://192.168.1.20:8787/
+4. Har bir o‘quvchi o‘z kompyuteridagi Chrome yoki Edge ga shu manzilni yozadi.
+5. Ism familiya va sinfni kiritib testni boshlaydi.
+6. Natijalar o‘qituvchi kompyuterida o‘zi ochiladi.
+   Kerak bo‘lsa brauzerga yozing: http://127.0.0.1:8787/oqituvchi
+7. To‘xtatish uchun qora oynada Ctrl+C bosing.
+
+Barcha kompyuterlar bir xil Wi-Fi yoki lokal tarmoqda bo‘lsin.
+Mehmon tarmog‘i ulanishni to‘sishi mumkin. Internet shart emas.
+
+PAKET TARKIBI
+• Informatika-30-test.html — hamma rasmlari ichiga joylangan offline nusxa.
+  Uni alohida fleshkaga ko‘chirib boshqa kompyuterda ham ishlatish mumkin.
+• 1_TESTNI_OCHISH.cmd — offline nusxani ochish.
+• 2_SAYTNI_OCHISH.cmd — alohida fayllarga ajratilgan saytni ochish.
+• 3_LOKAL_TARMOQ.cmd — sinfdagi kompyuterlar uchun o‘qituvchi serveri.
+• lokal-server.ps1 — shu serverning dasturi.
+• natijalar — lokal tarmoqda yakunlangan testlar.
+• sayt/index.html — sahifa tuzilishi.
+• sayt/style.css — dizayn.
+• sayt/app.js — testni tanlash, javob belgilash va baholash kodi.
+• sayt/bank.json — tahrirlash uchun savollar bazasi.
+• sayt/bank.js — brauzer yuklaydigan savollar bazasi.
+• sayt/questions/ — 1 560 ta savol rasmi.
+• qayta_yigish.py — bank.json yoki sayt kodini o‘zgartirgandan keyin
+  bank.js va yagona offline HTML nusxani yangilash vositasi (Python 3 kerak).
+• README.md — loyiha va tahrirlash haqida ma’lumot.
+
+IMKONIYATLAR
+1 560 ta savoldan har safar 30 ta takrorlanmaydigan savol tanlanadi.
+Javob variantini belgilang. Savollar orasida erkin o‘tish mumkin.
+Natija, to‘g‘ri javoblar va javobsiz savollar test yakunida ko‘rsatiladi.
+Mavzu bo‘yicha mashq qilish va savol rasmini kattalashtirish mumkin.
+
+ESLATMALAR
+Test holati shu brauzerda saqlanadi. Brauzer ma’lumotlarini tozalash,
+maxfiy rejim yoki mahalliy fayllar uchun saqlash cheklovi bunga ta’sir qiladi.
+Fayl boshqa papkaga ko‘chirilsa eski test holati ko‘rinmasligi mumkin.
+1_TESTNI_OCHISH.cmd da har bir kompyuter mustaqil ishlaydi.
+3_LOKAL_TARMOQ.cmd da natijalar o‘qituvchi kompyuteriga yig‘iladi.
+Sayt papkasini ko‘chirsangiz, questions papkasi va barcha fayllar birga bo‘lsin.
+
+Manba: M. Usmanov, Informatikadan mavzulashtirilgan testlar to‘plami,
+Navro‘z, 2018. Bu kitobdagi barcha savollar emas, ajratilgan 1 560 ta savol.
+Baholash kitobning javoblar kaliti bo‘yicha. Asl PDF paketga kiritilmagan.
