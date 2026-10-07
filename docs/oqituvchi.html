@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#123e35">
+<title>O‘qituvchi · Informatika 30 savol</title>
+<link rel="stylesheet" href="style.css?v=3">
+<style>
+.board{display:grid;gap:22px}
+.address{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 24px}
+.address a{color:var(--ink);font-weight:700;font-size:22px;letter-spacing:-.4px;text-decoration:none}
+.address a:hover{color:var(--green)}
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 24px;overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #edf0e9;white-space:nowrap}
+th{font-size:11px;letter-spacing:.4px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.score-cell{font-weight:700}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.empty{color:var(--muted);margin:8px 0 0}
+</style>
+</head>
+<body>
+<header class="header">
+  <a class="brand" href="/" aria-label="Bosh sahifa"><span class="brand-icon">i<span>_</span></span><span>informatika<span class="brand-sub">O‘QITUVCHI</span></span></a>
+  <span class="edition">M. Usmanov <span> / </span> 2018</span>
+  <span class="header-pill"><i></i> Lokal tarmoq</span>
+</header>
+<main>
+  <div class="home-heading">
+    <div><span class="eyebrow">O‘QITUVCHI KOMPYUTERI</span><h2>Sinf natijalari.</h2></div>
+    <span class="quiet" id="updated">Yangilanmoqda…</span>
+  </div>
+  <div class="board">
+    <section class="address">
+      <span class="eyebrow">O‘QUVCHILAR SHU MANZILNI OCHADI</span>
+      <div id="links" style="margin-top:12px"><p class="empty">Tarmoq manzili qidirilmoqda…</p></div>
+      <p style="margin:16px 0 0"><a class="button primary" href="/">Test bosh sahifasi</a></p>
+      <p class="quiet" style="margin:12px 0 0">Kompyuterlar bir xil Wi-Fi yoki lokal tarmoqda bo‘lsin. Mehmon tarmog‘ida qurilmalar bir-birini ko‘rmasligi mumkin. Bu sahifa faqat server ishga tushgan kompyuterda ochiladi.</p>
+    </section>
+    <section class="panel">
+      <div class="section-title"><h3>Hozir ishlayapti</h3><span class="quiet" id="live-count"></span></div>
+      <div id="live"></div>
+    </section>
+    <section class="panel">
+      <div class="section-title">
+        <h3>Yakunlangan testlar</h3>
+        <div class="tools">
+          <button class="button secondary" id="refresh" type="button">Yangilash</button>
+          <button class="button secondary" id="csv" type="button">Excelga yuklash</button>
+          <button class="button secondary" id="clear" type="button" hidden>Natijalarni tozalash</button>
+        </div>
+      </div>
+      <div id="done"></div>
+    </section>
+  </div>
+</main>
+<footer><span>Informatikadan mavzulashtirilgan testlar to‘plami</span><span>M. Usmanov · «Navro‘z», 2018</span></footer>
+<script>
+'use strict';
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clock = s => `${String(Math.floor((s||0)/60)).padStart(2,'0')}:${String((s||0)%60).padStart(2,'0')}`;
+let rows = [];
+async function load(){
+  const status = document.getElementById('updated');
+  try {
+    const [holat, data] = await Promise.all([
+      fetch('/api/holat', {cache:'no-store'}).then(r => r.json()),
+      fetch('/api/natijalar', {cache:'no-store'}).then(r => { if(!r.ok) throw Error('local'); return r.json(); })
+    ]);
+    const links = (holat.manzillar || []).map(url => `<div style="margin-top:8px"><a href="${esc(url)}">${esc(url)}</a></div>`).join('');
+    document.getElementById('links').innerHTML = links || '<p class="empty">Wi-Fi yoki lokal tarmoq manzili topilmadi. Kompyuterni tarmoqqa ulang va dasturni qayta ishga tushiring.</p>';
+    document.getElementById('clear').hidden = !holat.tozalash;
+    const live = data.jarayonda || [];
+    document.getElementById('live-count').textContent = live.length ? live.length + ' ta' : '';
+    document.getElementById('live').innerHTML = live.length ? `<table><thead><tr><th>Ism</th><th>Sinf</th><th>Mavzu</th><th>Javob</th><th>Savol</th></tr></thead><tbody>${live.map(r => `<tr><td>${esc(r.ism)}</td><td>${esc(r.sinf||'—')}</td><td>${esc(r.mavzu)}</td><td>${esc(r.javob)}${r.jami ? ' / ' + esc(r.jami) : ''}</td><td>${esc(r.savol)}</td></tr>`).join('')}</tbody></table>` : '<p class="empty">Hozircha faol test yo‘q.</p>';
+    rows = (data.natijalar || []).slice().sort((a,b) => String(b.vaqt).localeCompare(String(a.vaqt)));
+    document.getElementById('done').innerHTML = rows.length ? `<table><thead><tr><th>Vaqt</th><th>Ism</th><th>Sinf</th><th>Mavzu</th><th>To‘g‘ri</th><th>Noto‘g‘ri</th><th>Javobsiz</th><th>Foiz</th><th>Vaqt</th></tr></thead><tbody>${rows.map(r => `<tr><td>${esc(String(r.vaqt).replace('T',' ').slice(0,16))}</td><td>${esc(r.ism)}</td><td>${esc(r.sinf||'—')}</td><td>${esc(r.mavzu)}</td><td class="score-cell">${esc(r.togri)}${r.jami ? ' / ' + esc(r.jami) : ''}</td><td>${esc(r.notogri)}</td><td>${esc(r.javobsiz)}</td><td>${esc(r.foiz)}%</td><td>${clock(r.soniya)}</td></tr>`).join('')}</tbody></table>` : '<p class="empty">Hali natija kelmagan.</p>';
+    status.textContent = 'Yangilandi: ' + new Date().toLocaleTimeString('uz-UZ', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+  } catch {
+    status.textContent = 'Server bilan aloqa yo‘q';
+    document.getElementById('done').innerHTML = '<p class="empty">Natijalar faqat server ishga tushgan kompyuterning brauzerida ko‘rinadi.</p>';
+  }
+}
+document.getElementById('refresh').addEventListener('click', load);
+document.getElementById('csv').addEventListener('click', () => {
+  const head = ['Vaqt','Ism','Sinf','Mavzu','Togri','Notogri','Javobsiz','Foiz','Soniya'];
+  const lines = [head, ...rows.map(r => [r.vaqt, r.ism, r.sinf||'', r.mavzu, r.togri, r.notogri, r.javobsiz, r.foiz, r.soniya])];
+  const csv = lines.map(line => line.map(v => '"' + String(v ?? '').replace(/"/g, '""') + '"').join(';')).join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob(['\uFEFF' + csv], {type:'text/csv;charset=utf-8'}));
+  a.download = 'informatika-natijalar.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+document.getElementById('clear').addEventListener('click', async () => {
+  if (!window.confirm('Barcha saqlangan natijalar o‘chirilsinmi?')) return;
+  const r = await fetch('/api/tozalash', {method:'POST'});
+  if (!r.ok) { window.alert('Natijalarni tozalab bo‘lmadi.'); return; }
+  load();
+});
+load();
+setInterval(load, 4000);
+</script>
+</body>
+</html>
