@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#123e35">
-<title>O‘qituvchi · Informatika 30 savol</title>
+<title>O‘qituvchi · Matematika 4-sinf</title>
 <link rel="stylesheet" href="style.css?v=3">
 <style>
 .board{display:grid;gap:22px}
@@ -22,8 +22,8 @@ th{font-size:11px;letter-spacing:.4px;text-transform:uppercase;color:var(--muted
 </head>
 <body>
 <header class="header">
-  <a class="brand" href="/" aria-label="Bosh sahifa"><span class="brand-icon">i<span>_</span></span><span>informatika<span class="brand-sub">O‘QITUVCHI</span></span></a>
-  <span class="edition">M. Usmanov <span> / </span> 2018</span>
+  <a class="brand" href="/" aria-label="Bosh sahifa"><span class="brand-icon">4</span><span>matematika<span class="brand-sub">O‘QITUVCHI</span></span></a>
+  <span class="edition">I. V. Repyova <span> / </span> 2023</span>
   <span class="header-pill"><i></i> Lokal tarmoq</span>
 </header>
 <main>
@@ -55,7 +55,7 @@ th{font-size:11px;letter-spacing:.4px;text-transform:uppercase;color:var(--muted
     </section>
   </div>
 </main>
-<footer><span>Informatikadan mavzulashtirilgan testlar to‘plami</span><span>M. Usmanov · «Navro‘z», 2018</span></footer>
+<footer><span>Matematika. 4-sinf, I–IV qism</span><span>I. V. Repyova · «Novda Edutainment», 2023</span></footer>
 <script>
 'use strict';
 const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -89,7 +89,7 @@ document.getElementById('csv').addEventListener('click', () => {
   const csv = lines.map(line => line.map(v => '"' + String(v ?? '').replace(/"/g, '""') + '"').join(';')).join('\r\n');
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob(['\uFEFF' + csv], {type:'text/csv;charset=utf-8'}));
-  a.download = 'informatika-natijalar.csv';
+  a.download = 'matematika-4-sinf-natijalar.csv';
   a.click();
   URL.revokeObjectURL(a.href);
 });

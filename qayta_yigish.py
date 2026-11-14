@@ -10,7 +10,11 @@ bank = json.loads((site / 'bank.json').read_text(encoding='utf-8'))
 assert len({q['id'] for q in bank}) == len(bank), 'Savol ID takrorlangan'
 encoded = []
 for q in bank:
-    image = site / q['image']
+    image_name = q.get('image')
+    if not image_name:
+        encoded.append(dict(q))
+        continue
+    image = site / image_name
     data = image.read_bytes()
     if not data:
         raise ValueError(f'Rasm bo‘sh: {image}')
@@ -26,5 +30,5 @@ assert n == 2, 'JavaScript havolalari topilmadi'
 js = 'window.QUESTION_BANK=' + json.dumps(encoded, ensure_ascii=False, separators=(',', ':')) + ';\n' + (site / 'app.js').read_text(encoding='utf-8')
 js = re.sub(r'</script', lambda _: '<' + chr(92) + '/script', js, flags=re.I)
 html = html.replace('</body>', '<script>' + js + '</script></body>')
-(root / 'Informatika-30-test.html').write_text(html, encoding='utf-8')
-print(f'Tayyor: {len(bank)} ta savol. Informatika-30-test.html yangilandi.')
+(root / 'Matematika-4-sinf-30-test.html').write_text(html, encoding='utf-8')
+print(f'Tayyor: {len(bank)} ta savol. Matematika-4-sinf-30-test.html yangilandi.')

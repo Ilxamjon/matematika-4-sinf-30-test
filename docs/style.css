@@ -7,3 +7,10 @@ body{font-size:16px}.topic,.steps li,.button,.question-count,.navigator h3,.answ
 .timer.urgent{color:var(--red)}
 .chapter{margin:22px 0 8px;font-size:15px;letter-spacing:-.2px}
 .topic{white-space:normal;text-align:left}
+.prompt{font-size:22px;font-weight:650;line-height:1.45;margin:4px 0 8px}.prompt+.scan{margin-top:8px}
+.answers.text-choices{grid-template-columns:1fr}
+.answers.text-choices.short{grid-template-columns:1fr 1fr}
+.answers.text-choices .answer{justify-content:flex-start;text-align:left}
+.answers.text-choices .letter{min-width:1.5em;font-weight:750}
+.answers.text-choices .choice-text{font-weight:560;line-height:1.35}
+@media(max-width:680px){.answers.text-choices.short{grid-template-columns:1fr}.prompt{font-size:18px}}

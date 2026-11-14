@@ -1,13 +1,13 @@
-﻿INFORMATIKA — 30 TA TASODIFIY TEST
+﻿MATEMATIKA 4-SINF — 30 TA TASODIFIY TEST
 
 WINDOWS 10 / 11 DA ISHGA TUSHIRISH
 1. ZIP faylni kompyuteringizga yuklab oling.
 2. ZIP ustida sichqonchaning o‘ng tugmasini bosing.
 3. «Извлечь все…» / «Extract All…» ni tanlang.
-4. Masalan, D:\Informatika-test papkasiga to‘liq chiqaring.
+4. Masalan, D:\Matematika-test papkasiga to‘liq chiqaring.
    ZIP ichidan ishga tushirmang.
 5. Chiqarilgan papkada 1_TESTNI_OCHISH.cmd ni ikki marta bosing.
-   Yoki Informatika-30-test.html faylini Chrome yoki Edge orqali oching.
+   Yoki Matematika-4-sinf-30-test.html faylini Chrome yoki Edge orqali oching.
 6. «Testni boshlash» tugmasini bosing.
 
 Internet, Python, Node.js yoki alohida server talab qilinmaydi.
@@ -28,7 +28,7 @@ Barcha kompyuterlar bir xil Wi-Fi yoki lokal tarmoqda bo‘lsin.
 Mehmon tarmog‘i ulanishni to‘sishi mumkin. Internet shart emas.
 
 PAKET TARKIBI
-• Informatika-30-test.html — hamma rasmlari ichiga joylangan offline nusxa.
+• Matematika-4-sinf-30-test.html — savollari ichiga joylangan offline nusxa.
   Uni alohida fleshkaga ko‘chirib boshqa kompyuterda ham ishlatish mumkin.
 • 1_TESTNI_OCHISH.cmd — offline nusxani ochish.
 • 2_SAYTNI_OCHISH.cmd — alohida fayllarga ajratilgan saytni ochish.
@@ -40,16 +40,19 @@ PAKET TARKIBI
 • sayt/app.js — testni tanlash, javob belgilash va baholash kodi.
 • sayt/bank.json — tahrirlash uchun savollar bazasi.
 • sayt/bank.js — brauzer yuklaydigan savollar bazasi.
-• sayt/questions/ — 1 560 ta savol rasmi.
+• tuzish.py — 4-sinf matematika savollarini qayta tuzish (Python 3).
+• masalalar.py — matnli masalalar.
 • qayta_yigish.py — bank.json yoki sayt kodini o‘zgartirgandan keyin
-  bank.js va yagona offline HTML nusxani yangilash vositasi (Python 3 kerak).
+  bank.js va yagona offline HTML nusxani yangilash vositasi (Python 3).
 • README.md — loyiha va tahrirlash haqida ma’lumot.
 
 IMKONIYATLAR
-1 560 ta savoldan har safar 30 ta takrorlanmaydigan savol tanlanadi.
+2229 ta savoldan har safar 30 ta takrorlanmaydigan savol tanlanadi.
+508 tasi matnli masala: pul, taqsimlash, yo‘l, ulush, foiz.
+255 ta savol rasmli: soat, diagramma, shakl, burchak, kasr.
 Javob variantini belgilang. Savollar orasida erkin o‘tish mumkin.
 Natija, to‘g‘ri javoblar va javobsiz savollar test yakunida ko‘rsatiladi.
-Mavzu bo‘yicha mashq qilish va savol rasmini kattalashtirish mumkin.
+Mavzu bo‘yicha mashq qilish mumkin.
 
 ESLATMALAR
 Test holati shu brauzerda saqlanadi. Brauzer ma’lumotlarini tozalash,
@@ -57,8 +60,7 @@ maxfiy rejim yoki mahalliy fayllar uchun saqlash cheklovi bunga ta’sir qiladi.
 Fayl boshqa papkaga ko‘chirilsa eski test holati ko‘rinmasligi mumkin.
 1_TESTNI_OCHISH.cmd da har bir kompyuter mustaqil ishlaydi.
 3_LOKAL_TARMOQ.cmd da natijalar o‘qituvchi kompyuteriga yig‘iladi.
-Sayt papkasini ko‘chirsangiz, questions papkasi va barcha fayllar birga bo‘lsin.
 
-Manba: M. Usmanov, Informatikadan mavzulashtirilgan testlar to‘plami,
-Navro‘z, 2018. Bu kitobdagi barcha savollar emas, ajratilgan 1 560 ta savol.
-Baholash kitobning javoblar kaliti bo‘yicha. Asl PDF paketga kiritilmagan.
+Manba: I. V. Repyova, Matematika, 4-sinf, I–IV qism,
+«Novda Edutainment», 2023. Savollar darslik mavzulariga moslab tuzilgan,
+darslikdagi mashqlarning nusxasi emas.

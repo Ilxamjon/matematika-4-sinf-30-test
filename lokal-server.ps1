@@ -489,7 +489,8 @@ if (-not $compiled) { throw 'Server kodini yigib bolmadi.' }
 $server = New-Object LocalQuiz.Server($site, $results, $port)
 $lan = -not $LocalOnly
 if ($lan) {
-  $rule = 'Informatika-30-test'
+  $rule = 'Matematika-4-sinf-30-test'
+  $null = netsh advfirewall firewall delete rule name='Informatika-30-test' 2>$null
   $null = netsh advfirewall firewall delete rule name="$rule" 2>$null
   $null = netsh advfirewall firewall add rule name="$rule" dir=in action=allow protocol=TCP localport=$port profile=any
   if ($LASTEXITCODE -ne 0) {
@@ -526,5 +527,5 @@ try {
   while ($server.IsRunning) { Start-Sleep -Milliseconds 500 }
 } finally {
   $server.Stop()
-  if ($lan) { $null = netsh advfirewall firewall delete rule name='Informatika-30-test' 2>$null }
+  if ($lan) { $null = netsh advfirewall firewall delete rule name='Matematika-4-sinf-30-test' 2>$null }
 }
